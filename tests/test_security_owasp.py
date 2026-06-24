@@ -103,9 +103,8 @@ def test_api_key_required(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_api_key_format_enforced(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv(
-        "FRED_API_KEY", "UPPER0123456789abcdef0123456789x"
-    )  # has uppercase  # gitleaks:allow  # pragma: allowlist secret
+    bad_key = "UPPER0123456789abcdef0123456789x"  # has uppercase  # gitleaks:allow  # pragma: allowlist secret
+    monkeypatch.setenv("FRED_API_KEY", bad_key)
     with pytest.raises(FredConfigurationError):
         resolve_api_key()
 
