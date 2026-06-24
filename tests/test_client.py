@@ -32,7 +32,7 @@ from fred_macro_mcp.errors import (
     FredTransientError,
 )
 
-KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret - test token
+KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret  # gitleaks:allow
 OBS_URL = f"{FRED_HOST}/fred/series/observations"
 
 
@@ -132,16 +132,20 @@ async def test_token_bucket_blocks_when_full(monkeypatch: pytest.MonkeyPatch) ->
 
 
 def test_token_bucket_tokens_remaining_evicts_old() -> None:
+    import time
+
     bucket = TokenBucket(2)
-    bucket._timestamps.append(0.0)  # ancient timestamp, outside window
+    bucket._timestamps.append(time.monotonic() - 120.0)  # outside the 60s window
     assert bucket.tokens_remaining() == 2
 
 
 async def test_token_bucket_acquire_evicts_old_timestamp() -> None:
-    # An ancient timestamp (monotonic 0.0) is well outside the 60s window;
-    # acquire() must evict it (client.py eviction loop) and admit.
+    import time
+
+    # A timestamp 120s in the past is well outside the 60s window; acquire()
+    # must evict it (client.py eviction loop) and admit.
     bucket = TokenBucket(1)
-    bucket._timestamps.append(0.0)
+    bucket._timestamps.append(time.monotonic() - 120.0)
     await bucket.acquire()  # evicts the stale entry, then admits
     assert bucket.tokens_remaining() == 0
 

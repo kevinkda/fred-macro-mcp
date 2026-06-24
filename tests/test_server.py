@@ -26,7 +26,7 @@ from fred_macro_mcp.errors import (
 )
 from fred_macro_mcp.server import SERVER_VERSION, _frame_error, app
 
-KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret - test token
+KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret  # gitleaks:allow
 OBS_URL = f"{FRED_HOST}/fred/series/observations"
 SEARCH_URL = f"{FRED_HOST}/fred/series/search"
 RELEASES_URL = f"{FRED_HOST}/fred/releases/dates"

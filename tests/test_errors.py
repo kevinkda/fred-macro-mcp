@@ -20,7 +20,7 @@ from fred_macro_mcp.errors import (
     redact_secrets,
 )
 
-REAL_SHAPE_KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret - test token
+REAL_SHAPE_KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret  # gitleaks:allow
 
 
 # ---------------------------------------------------------------------------

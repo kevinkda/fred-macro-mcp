@@ -23,7 +23,7 @@ from fred_macro_mcp.models import (
 from fred_macro_mcp.tools import meta, releases, search, series
 from fred_macro_mcp.tools._runtime import call_with_cache, get_client, set_client_for_tests
 
-KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret - test token
+KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret  # gitleaks:allow
 OBS_URL = f"{FRED_HOST}/fred/series/observations"
 SEARCH_URL = f"{FRED_HOST}/fred/series/search"
 RELEASES_URL = f"{FRED_HOST}/fred/releases/dates"

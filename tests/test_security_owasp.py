@@ -46,7 +46,7 @@ from fred_macro_mcp.errors import (
 from fred_macro_mcp.models import GetSeriesInput, SearchSeriesInput
 from fred_macro_mcp.tools import series
 
-KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret - test token
+KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret  # gitleaks:allow
 OBS_URL = f"{FRED_HOST}/fred/series/observations"
 
 
@@ -103,7 +103,9 @@ def test_api_key_required(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_api_key_format_enforced(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("FRED_API_KEY", "UPPER0123456789abcdef0123456789x")  # has uppercase
+    monkeypatch.setenv(
+        "FRED_API_KEY", "UPPER0123456789abcdef0123456789x"
+    )  # has uppercase  # gitleaks:allow  # pragma: allowlist secret
     with pytest.raises(FredConfigurationError):
         resolve_api_key()
 

@@ -17,7 +17,7 @@ import fred_macro_mcp.cache as cache_mod
 import fred_macro_mcp.tools._runtime as runtime_mod
 
 # A syntactically-valid FRED key (32 lowercase alphanumerics) — NOT real.
-TEST_API_KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret - test fixture
+TEST_API_KEY = "abcdef0123456789abcdef0123456789"  # pragma: allowlist secret  # gitleaks:allow
 
 
 @pytest.fixture(autouse=True)
